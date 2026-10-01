@@ -5,10 +5,7 @@ import Appointment from '../models/Appointment.js';
 import { paginate, buildPaginationResult } from '../utils/helpers.js';
 
 const canAccessPet = async (user, petId) => {
-<<<<<<< HEAD
   if (!user) return false;
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   if (user.role === 'admin') return true;
 
   if (user.role === 'owner') {
@@ -22,7 +19,6 @@ const canAccessPet = async (user, petId) => {
       pet: petId,
       status: { $in: ['approved', 'completed'] },
     });
-<<<<<<< HEAD
     if (appointment) return true;
 
     const record = await HealthRecord.findOne({
@@ -30,9 +26,6 @@ const canAccessPet = async (user, petId) => {
       $or: [{ vet: user._id }, { recordedBy: user._id }],
     });
     return !!record;
-=======
-    return !!appointment;
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   }
 
   return false;

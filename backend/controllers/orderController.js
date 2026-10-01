@@ -67,11 +67,8 @@ export const getOrders = asyncHandler(async (req, res) => {
   const query = {};
   if (req.user.role === 'owner') {
     query.owner = req.user._id;
-<<<<<<< HEAD
   } else if (req.user.role !== 'admin') {
     return res.status(403).json({ success: false, message: 'Not authorized to list all orders' });
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   }
   if (status) query.status = status;
 

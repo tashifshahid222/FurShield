@@ -25,13 +25,8 @@ export const Register = () => {
     e.preventDefault();
     setError('');
 
-<<<<<<< HEAD
     if (form.password.length < 8) {
       setError('Password must be at least 8 characters.');
-=======
-    if (form.password.length < 6) {
-      setError('Password must be at least 6 characters.');
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
       return;
     }
     if (form.password !== form.confirmPassword) {
@@ -110,11 +105,7 @@ export const Register = () => {
             <div className="form-row">
               <div className="form-group">
                 <label className="form-label">Password <span className="required">*</span></label>
-<<<<<<< HEAD
                 <input className="form-control" type="password" name="password" value={form.password} onChange={handleChange} minLength={8} required />
-=======
-                <input className="form-control" type="password" name="password" value={form.password} onChange={handleChange} required />
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
               </div>
               <div className="form-group">
                 <label className="form-label">Confirm password <span className="required">*</span></label>

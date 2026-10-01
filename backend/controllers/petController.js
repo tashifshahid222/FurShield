@@ -2,7 +2,6 @@ import asyncHandler from '../middleware/asyncHandler.js';
 import Pet from '../models/Pet.js';
 import HealthRecord from '../models/HealthRecord.js';
 import Appointment from '../models/Appointment.js';
-<<<<<<< HEAD
 import { paginate, buildPaginationResult, escapeRegex, removeUpload } from '../utils/helpers.js';
 
 // Owners may access their own pets; admins may access any pet.
@@ -28,9 +27,6 @@ const canModifyPet = (user, pet) => {
   if (user.role === 'admin') return true;
   return pet.owner.toString() === user._id.toString();
 };
-=======
-import { paginate, buildPaginationResult } from '../utils/helpers.js';
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 
 export const getPets = asyncHandler(async (req, res) => {
   const { page, limit, search, species } = req.query;
@@ -40,7 +36,6 @@ export const getPets = asyncHandler(async (req, res) => {
 
   if (req.user.role === 'owner') {
     query.owner = req.user._id;
-<<<<<<< HEAD
   } else if (req.user.role !== 'admin') {
     return res.status(403).json({ success: false, message: 'Not authorized to list all pets' });
   }
@@ -48,13 +43,6 @@ export const getPets = asyncHandler(async (req, res) => {
     query.$or = [
       { name: { $regex: escapeRegex(search), $options: 'i' } },
       { breed: { $regex: escapeRegex(search), $options: 'i' } },
-=======
-  }
-  if (search) {
-    query.$or = [
-      { name: { $regex: search, $options: 'i' } },
-      { breed: { $regex: search, $options: 'i' } },
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
     ];
   }
   if (species) query.species = species;
@@ -75,17 +63,12 @@ export const getMyPets = asyncHandler(async (req, res) => {
 });
 
 export const getPetById = asyncHandler(async (req, res) => {
-<<<<<<< HEAD
   const pet = await Pet.findById(req.params.id);
-=======
-  const pet = await Pet.findById(req.params.id).populate('owner', 'name email phone');
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 
   if (!pet) {
     return res.status(404).json({ success: false, message: 'Pet not found' });
   }
 
-<<<<<<< HEAD
   const hasAccess = await canAccessPet(req.user, pet);
   if (!hasAccess) {
     return res.status(403).json({ success: false, message: 'Not authorized to view this pet' });
@@ -94,9 +77,6 @@ export const getPetById = asyncHandler(async (req, res) => {
   const populated = await pet.populate('owner', 'name email phone');
 
   res.status(200).json({ success: true, data: populated });
-=======
-  res.status(200).json({ success: true, data: pet });
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 });
 
 export const createPet = asyncHandler(async (req, res) => {
@@ -132,11 +112,7 @@ export const updatePet = asyncHandler(async (req, res) => {
     return res.status(404).json({ success: false, message: 'Pet not found' });
   }
 
-<<<<<<< HEAD
   if (!canModifyPet(req.user, pet)) {
-=======
-  if (req.user.role === 'owner' && pet.owner.toString() !== req.user._id.toString()) {
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
     return res.status(403).json({ success: false, message: 'Not authorized to update this pet' });
   }
 
@@ -154,7 +130,6 @@ export const updatePet = asyncHandler(async (req, res) => {
     updateData.image = `/uploads/${req.file.filename}`;
   }
 
-<<<<<<< HEAD
   const previousImage = pet.image;
   const updated = await Pet.findByIdAndUpdate(pet._id, updateData, { new: true, runValidators: true });
 
@@ -162,10 +137,6 @@ export const updatePet = asyncHandler(async (req, res) => {
     await removeUpload(previousImage);
   }
 
-=======
-  const updated = await Pet.findByIdAndUpdate(pet._id, updateData, { new: true, runValidators: true });
-
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   res.status(200).json({ success: true, message: 'Pet updated successfully', data: updated });
 });
 
@@ -176,7 +147,6 @@ export const deletePet = asyncHandler(async (req, res) => {
     return res.status(404).json({ success: false, message: 'Pet not found' });
   }
 
-<<<<<<< HEAD
   if (!canModifyPet(req.user, pet)) {
     return res.status(403).json({ success: false, message: 'Not authorized to delete this pet' });
   }
@@ -189,15 +159,6 @@ export const deletePet = asyncHandler(async (req, res) => {
     await removeUpload(img);
   }
 
-=======
-  if (req.user.role === 'owner' && pet.owner.toString() !== req.user._id.toString()) {
-    return res.status(403).json({ success: false, message: 'Not authorized to delete this pet' });
-  }
-
-  await HealthRecord.deleteMany({ pet: pet._id });
-  await pet.deleteOne();
-
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   res.status(200).json({ success: true, message: 'Pet and its health records deleted' });
 });
 
@@ -208,11 +169,7 @@ export const addToGallery = asyncHandler(async (req, res) => {
     return res.status(404).json({ success: false, message: 'Pet not found' });
   }
 
-<<<<<<< HEAD
   if (!canModifyPet(req.user, pet)) {
-=======
-  if (req.user.role === 'owner' && pet.owner.toString() !== req.user._id.toString()) {
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
     return res.status(403).json({ success: false, message: 'Not authorized to update this pet' });
   }
 
@@ -236,7 +193,6 @@ export const removeFromGallery = asyncHandler(async (req, res) => {
     return res.status(404).json({ success: false, message: 'Pet not found' });
   }
 
-<<<<<<< HEAD
   if (!canModifyPet(req.user, pet)) {
     return res.status(403).json({ success: false, message: 'Not authorized to update this pet' });
   }
@@ -246,11 +202,6 @@ export const removeFromGallery = asyncHandler(async (req, res) => {
 
   await removeUpload(req.body.imageUrl);
 
-=======
-  pet.gallery = pet.gallery.filter((img) => img !== req.body.imageUrl);
-  await pet.save();
-
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   res.status(200).json({ success: true, message: 'Image removed from gallery', data: pet });
 });
 

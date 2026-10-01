@@ -22,15 +22,10 @@ A full-stack pet care platform that connects pet owners, veterinarians, and shel
 - Node.js + Express.js
 - MongoDB with Mongoose
 - JWT authentication + bcryptjs
-<<<<<<< HEAD
 - Multer 2.x (file uploads)
 - express-validator
 - helmet (security headers)
 - express-rate-limit (brute-force throttling)
-=======
-- Multer (file uploads)
-- express-validator
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 
 **Frontend**
 - React 18 + Vite
@@ -73,7 +68,6 @@ A full-stack pet care platform that connects pet owners, veterinarians, and shel
 
 4. **Set up environment variables**
 
-<<<<<<< HEAD
    Inside the `backend/` folder, create a `.env` file. You can copy `backend/.env.example`:
 
    ```bash
@@ -106,17 +100,6 @@ A full-stack pet care platform that connects pet owners, veterinarians, and shel
    If you leave it unset it falls back to the localhost dev ports listed above, and a
    warning is logged in production — always set it explicitly when deploying.
 
-=======
-   Inside the `backend/` folder, create a `.env` file with:
-   ```
-   PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/furshield
-   JWT_SECRET=your_secret_key
-   JWT_EXPIRE=30d
-   NODE_ENV=development
-   ```
-
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 5. **Run the project**
 
    Backend (on port 5000):
@@ -143,11 +126,8 @@ node db/seed.js
 ```
 
 The script is safe to re-run — it skips records that already exist instead of duplicating them.
-<<<<<<< HEAD
 It **refuses to run when `NODE_ENV=production`** so demo data can never be written to a live
 database. Running it always prints a warning about the demo accounts it creates.
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 
 ### Demo / Test Credentials
 
@@ -158,7 +138,6 @@ database. Running it always prints a warning about the demo accounts it creates.
 | Shelter | shelter@furshield.com | shelter123 | "Happy Paws Shelter", pre-verified, with 2 sample adoption listings |
 | Pet Owner | *(none seeded)* | — | Register a new account via the **Register** page and select the "Owner" role |
 
-<<<<<<< HEAD
 > **Security note:** These credentials are for local development and evaluation only, and
 > they are printed on the login page. Never use them, or the `JWT_SECRET` placeholder, in a
 > production deployment.
@@ -268,9 +247,6 @@ raise `limit` in `backend/middleware/rateLimit.js` while testing.
 > distinct "no account found with this email" vs "incorrect password" message, which is
 > friendlier but allows email enumeration; revert to a single generic message before a
 > production launch.
-=======
-> **Security note:** These credentials are for local development and evaluation only. Never use them, or the default `JWT_SECRET` placeholder, in a production deployment.
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 
 ## Project Structure
 
@@ -280,7 +256,6 @@ FurShield/
 │   ├── config/        # DB connection setup
 │   ├── controllers/    # Request handlers
 │   ├── db/             # Seed script
-<<<<<<< HEAD
 │   ├── middleware/     # Auth, validation, upload, rate limiting, sanitization, error handling
 │   ├── models/         # Mongoose schemas
 │   ├── routes/         # Express route definitions
@@ -288,13 +263,6 @@ FurShield/
 │   ├── utils/           # Helper functions
 │   ├── validators/      # express-validator rule sets
 │   ├── .env.example     # Template for required environment variables
-=======
-│   ├── middleware/     # Auth, validation, upload, error handling
-│   ├── models/         # Mongoose schemas
-│   ├── routes/         # Express route definitions
-│   ├── uploads/         # Uploaded images (gitignored)
-│   ├── utils/           # Helper functions
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 │   └── server.js        # App entry point
 └── frontend/
     ├── public/

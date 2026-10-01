@@ -1,11 +1,7 @@
 import CareArticle from '../models/CareArticle.js';
 import Faq from '../models/Faq.js';
 import Video from '../models/Video.js';
-<<<<<<< HEAD
 import { paginate, buildPaginationResult, escapeRegex } from '../utils/helpers.js';
-=======
-import { paginate, buildPaginationResult } from '../utils/helpers.js';
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 import { AppError } from '../utils/AppError.js';
 
 const isAdmin = (actor) => {
@@ -23,15 +19,9 @@ export const listArticles = async ({ page, limit, search, category, isPublic, in
   if (category) query.category = category;
   if (search) {
     query.$or = [
-<<<<<<< HEAD
       { title: { $regex: escapeRegex(search), $options: 'i' } },
       { content: { $regex: escapeRegex(search), $options: 'i' } },
       { tags: { $in: [new RegExp(escapeRegex(search), 'i')] } },
-=======
-      { title: { $regex: search, $options: 'i' } },
-      { content: { $regex: search, $options: 'i' } },
-      { tags: { $in: [new RegExp(search, 'i')] } },
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
     ];
   }
 
@@ -103,13 +93,8 @@ export const listFaqs = async ({ search, category, includeInactive = false }) =>
   if (category) query.category = category;
   if (search) {
     query.$or = [
-<<<<<<< HEAD
       { question: { $regex: escapeRegex(search), $options: 'i' } },
       { answer: { $regex: escapeRegex(search), $options: 'i' } },
-=======
-      { question: { $regex: search, $options: 'i' } },
-      { answer: { $regex: search, $options: 'i' } },
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
     ];
   }
   return Faq.find(query).sort({ order: 1, createdAt: -1 });
@@ -160,13 +145,8 @@ export const listVideos = async ({ page, limit, search, category, isPublic, incl
   if (category) query.category = category;
   if (search) {
     query.$or = [
-<<<<<<< HEAD
       { title: { $regex: escapeRegex(search), $options: 'i' } },
       { description: { $regex: escapeRegex(search), $options: 'i' } },
-=======
-      { title: { $regex: search, $options: 'i' } },
-      { description: { $regex: search, $options: 'i' } },
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
     ];
   }
 

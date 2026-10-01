@@ -12,10 +12,7 @@ out/
 
 # Log files
 *.log
-<<<<<<< HEAD
 
 # User-uploaded files (seed images are tracked, they are required by db/seed.js)
 uploads/*
 !uploads/seed-*.jpg
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4

@@ -3,11 +3,7 @@ import User from '../models/User.js';
 import Pet from '../models/Pet.js';
 import Appointment from '../models/Appointment.js';
 import AdoptionListing from '../models/AdoptionListing.js';
-<<<<<<< HEAD
 import { paginate, buildPaginationResult, sendNotification, escapeRegex } from '../utils/helpers.js';
-=======
-import { paginate, buildPaginationResult, sendNotification } from '../utils/helpers.js';
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 
 export const getUsers = asyncHandler(async (req, res) => {
   const { page, limit, search, role, status } = req.query;
@@ -18,13 +14,8 @@ export const getUsers = asyncHandler(async (req, res) => {
   if (status) query.status = status;
   if (search) {
     query.$or = [
-<<<<<<< HEAD
       { name: { $regex: escapeRegex(search), $options: 'i' } },
       { email: { $regex: escapeRegex(search), $options: 'i' } },
-=======
-      { name: { $regex: search, $options: 'i' } },
-      { email: { $regex: search, $options: 'i' } },
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
     ];
   }
 
@@ -46,23 +37,16 @@ export const getUserById = asyncHandler(async (req, res) => {
 });
 
 export const updateUser = asyncHandler(async (req, res) => {
-<<<<<<< HEAD
   const { name, phone, status, role, address, shelterProfile } = req.body;
-=======
-  const { name, phone, status, role, address } = req.body;
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   const updateData = {};
   if (name !== undefined) updateData.name = name;
   if (phone !== undefined) updateData.phone = phone;
   if (status !== undefined) updateData.status = status;
   if (role !== undefined && req.user.role === 'admin') updateData.role = role;
   if (address !== undefined) updateData.address = address;
-<<<<<<< HEAD
   if (shelterProfile !== undefined && typeof shelterProfile === 'object' && req.user.role === 'admin') {
     updateData.shelterProfile = shelterProfile;
   }
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 
   const user = await User.findByIdAndUpdate(req.params.id, updateData, {
     new: true,
@@ -145,7 +129,6 @@ export const getPublicVeterinarians = asyncHandler(async (req, res) => {
 
   if (search) {
     query.$or = [
-<<<<<<< HEAD
       { name: { $regex: escapeRegex(search), $options: 'i' } },
       { 'veterinarianProfile.specialization': { $regex: escapeRegex(search), $options: 'i' } },
       { 'veterinarianProfile.bio': { $regex: escapeRegex(search), $options: 'i' } },
@@ -160,22 +143,6 @@ export const getPublicVeterinarians = asyncHandler(async (req, res) => {
   }
   if (city) {
     query['address.city'] = { $regex: escapeRegex(city), $options: 'i' };
-=======
-      { name: { $regex: search, $options: 'i' } },
-      { 'veterinarianProfile.specialization': { $regex: search, $options: 'i' } },
-      { 'veterinarianProfile.bio': { $regex: search, $options: 'i' } },
-      { 'address.city': { $regex: search, $options: 'i' } },
-    ];
-  }
-  if (specialization) {
-    query['veterinarianProfile.specialization'] = { $regex: specialization, $options: 'i' };
-  }
-  if (name) {
-    query.name = { $regex: name, $options: 'i' };
-  }
-  if (city) {
-    query['address.city'] = { $regex: city, $options: 'i' };
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   }
 
   const total = await User.countDocuments(query);
@@ -225,15 +192,9 @@ export const getPublicShelters = asyncHandler(async (req, res) => {
   const query = { role: 'shelter', status: 'active' };
   if (search) {
     query.$or = [
-<<<<<<< HEAD
       { name: { $regex: escapeRegex(search), $options: 'i' } },
       { 'shelterProfile.name': { $regex: escapeRegex(search), $options: 'i' } },
       { 'address.city': { $regex: escapeRegex(search), $options: 'i' } },
-=======
-      { name: { $regex: search, $options: 'i' } },
-      { 'shelterProfile.name': { $regex: search, $options: 'i' } },
-      { 'address.city': { $regex: search, $options: 'i' } },
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
     ];
   }
 

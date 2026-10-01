@@ -83,25 +83,17 @@ export const getAppointments = asyncHandler(async (req, res) => {
     query.owner = req.user._id;
   } else if (req.user.role === 'veterinarian') {
     query.veterinarian = req.user._id;
-<<<<<<< HEAD
   } else if (req.user.role !== 'admin') {
     return res.status(403).json({ success: false, message: 'Not authorized to view appointments' });
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   }
 
   if (status) {
     query.status = status;
   }
-<<<<<<< HEAD
   if (req.user.role === 'admin') {
     if (veterinarian) query.veterinarian = veterinarian;
     if (pet) query.pet = pet;
   }
-=======
-  if (veterinarian) query.veterinarian = veterinarian;
-  if (pet) query.pet = pet;
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 
   const total = await Appointment.countDocuments(query);
   const appointments = await Appointment.find(query)

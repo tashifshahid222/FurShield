@@ -1,18 +1,12 @@
 import multer from 'multer';
-<<<<<<< HEAD
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { AppError } from '../utils/AppError.js';
-=======
-import path from 'path';
-import { fileURLToPath } from 'url';
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-<<<<<<< HEAD
 const UPLOADS_DIR = path.join(__dirname, '../uploads');
 
 const IMAGE_MIME_EXTENSIONS = {
@@ -37,20 +31,10 @@ const storage = multer.diskStorage({
     // The stored extension is derived from the validated mimetype, never the
     // client-supplied filename, so a crafted name cannot change the file type.
     const ext = file.mimetypeExt || '';
-=======
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../uploads'));
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    const ext = path.extname(file.originalname);
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
     cb(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
   },
 });
 
-<<<<<<< HEAD
 const makeFileFilter = (allowedMap, message) => (req, file, cb) => {
   const mimetype = (file.mimetype || '').toLowerCase();
 
@@ -168,39 +152,19 @@ export const verifyUploadedFiles = (allowedMap) => async (req, res, next) => {
   }
 
   next();
-=======
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png|gif|webp/;
-  const mimetype = allowedTypes.test(file.mimetype);
-  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-
-  if (mimetype && extname) {
-    return cb(null, true);
-  }
-  cb(new Error('Only image files are allowed'));
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 };
 
 export const upload = multer({
   storage,
-<<<<<<< HEAD
   fileFilter: imageFilter,
-=======
-  fileFilter,
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   limits: { fileSize: 5 * 1024 * 1024 },
 });
 
 export const uploadDocuments = multer({
   storage,
-<<<<<<< HEAD
   fileFilter: documentFilter,
   limits: { fileSize: 10 * 1024 * 1024 },
 });
 
 export const verifyImageUpload = verifyUploadedFiles(IMAGE_MIME_EXTENSIONS);
 export const verifyDocumentUpload = verifyUploadedFiles(DOCUMENT_MIME_EXTENSIONS);
-=======
-  limits: { fileSize: 10 * 1024 * 1024 },
-});
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4

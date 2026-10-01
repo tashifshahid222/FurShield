@@ -21,11 +21,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, 'Password is required'],
-<<<<<<< HEAD
       minlength: [8, 'Password must be at least 8 characters'],
-=======
-      minlength: [6, 'Password must be at least 6 characters'],
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
       select: false,
     },
     role: {
@@ -101,10 +97,7 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 userSchema.methods.getSignedJwtToken = function () {
   return jwt.sign({ id: this._id, role: this.role }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE || '7d',
-<<<<<<< HEAD
     algorithm: 'HS256',
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   });
 };
 

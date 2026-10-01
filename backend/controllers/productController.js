@@ -1,11 +1,7 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import Product from '../models/Product.js';
 import Category from '../models/Category.js';
-<<<<<<< HEAD
 import { paginate, buildPaginationResult, escapeRegex, removeUpload } from '../utils/helpers.js';
-=======
-import { paginate, buildPaginationResult } from '../utils/helpers.js';
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 
 export const getProducts = asyncHandler(async (req, res) => {
   const { page, limit, search, category, minPrice, maxPrice, sort, minRating } = req.query;
@@ -24,13 +20,8 @@ export const getProducts = asyncHandler(async (req, res) => {
 
   if (search) {
     query.$or = [
-<<<<<<< HEAD
       { name: { $regex: escapeRegex(search), $options: 'i' } },
       { description: { $regex: escapeRegex(search), $options: 'i' } },
-=======
-      { name: { $regex: search, $options: 'i' } },
-      { description: { $regex: search, $options: 'i' } },
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
     ];
   }
   if (category) query.category = category;
@@ -127,22 +118,16 @@ export const updateProduct = asyncHandler(async (req, res) => {
 
   if (req.file) updateData.image = `/uploads/${req.file.filename}`;
 
-<<<<<<< HEAD
   const previousImage = product.image;
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   const updated = await Product.findByIdAndUpdate(product._id, updateData, {
     new: true,
     runValidators: true,
   });
 
-<<<<<<< HEAD
   if (updateData.image && previousImage && previousImage !== updateData.image) {
     await removeUpload(previousImage);
   }
 
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   res.status(200).json({ success: true, message: 'Product updated', data: updated });
 });
 

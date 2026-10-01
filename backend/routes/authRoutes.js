@@ -10,7 +10,6 @@ import {
   updateShelterProfile,
 } from '../controllers/authController.js';
 import { protect, authorize } from '../middleware/auth.js';
-<<<<<<< HEAD
 import { validate } from '../middleware/validation.js';
 import { authLimiter } from '../middleware/rateLimit.js';
 import {
@@ -29,18 +28,6 @@ router.post('/logout', logout);
 router.get('/me', protect, getMe);
 router.put('/profile', protect, validate(profileValidators), updateProfile);
 router.put('/password', protect, validate(passwordValidators), updatePassword);
-=======
-
-const router = express.Router();
-
-router.post('/register', register);
-router.post('/login', login);
-router.post('/logout', logout);
-
-router.get('/me', protect, getMe);
-router.put('/profile', protect, updateProfile);
-router.put('/password', protect, updatePassword);
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 router.put('/vet-profile', protect, authorize('veterinarian'), updateVeterinarianProfile);
 router.put('/shelter-profile', protect, authorize('shelter'), updateShelterProfile);
 

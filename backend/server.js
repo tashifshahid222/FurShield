@@ -1,23 +1,17 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-<<<<<<< HEAD
 import helmet from 'helmet';
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 import connectDB from './config/db.js';
-<<<<<<< HEAD
 import mongoSanitize from './middleware/mongoSanitize.js';
 import {
   apiLimiter,
   authLimiter,
   contactLimiter,
 } from './middleware/rateLimit.js';
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import petRoutes from './routes/petRoutes.js';
@@ -38,7 +32,6 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-<<<<<<< HEAD
 // Matches obvious placeholders such as "your_secret_key", "changeme-xxx",
 // "please-change-this", "test-secret", ... even with random suffixes appended.
 const PLACEHOLDER_SECRET = /(your|my|please|this|the|change[_-]?(me|this)|replace|insert|default|example|test|demo|sample|placeholder|put|add|todo|xxx+)[-_ ]*(secret|jwt|password|key)/i;
@@ -62,13 +55,10 @@ const validateEnv = () => {
 
 validateEnv();
 
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 connectDB();
 
 const app = express();
 
-<<<<<<< HEAD
 // express-rate-limit reads req.ip, which depends on the X-Forwarded-For header.
 if (process.env.NODE_ENV === 'production') {
   app.set('trust proxy', 1);
@@ -89,16 +79,10 @@ if (!CLIENT_ORIGINS.length && process.env.NODE_ENV === 'production') {
 app.use(
   cors({
     origin: allowedOrigins,
-=======
-app.use(
-  cors({
-    origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000'],
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
     credentials: true,
   })
 );
 
-<<<<<<< HEAD
 app.use(helmet());
 app.use(apiLimiter);
 
@@ -119,12 +103,6 @@ app.use(
     },
   })
 );
-=======
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true }));
-
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 
 app.get('/api/v1/health', (req, res) => {
   res.status(200).json({ success: true, message: 'FurShield API is running', timestamp: new Date().toISOString() });

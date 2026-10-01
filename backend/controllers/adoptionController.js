@@ -1,11 +1,7 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import AdoptionListing from '../models/AdoptionListing.js';
 import User from '../models/User.js';
-<<<<<<< HEAD
 import { paginate, buildPaginationResult, sendNotification, escapeRegex, removeUpload } from '../utils/helpers.js';
-=======
-import { paginate, buildPaginationResult, sendNotification } from '../utils/helpers.js';
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 
 export const getListings = asyncHandler(async (req, res) => {
   const { page, limit, search, species, adoptionStatus, shelter } = req.query;
@@ -20,15 +16,9 @@ export const getListings = asyncHandler(async (req, res) => {
   if (shelter) query.shelter = shelter;
   if (search) {
     query.$or = [
-<<<<<<< HEAD
       { petName: { $regex: escapeRegex(search), $options: 'i' } },
       { breed: { $regex: escapeRegex(search), $options: 'i' } },
       { description: { $regex: escapeRegex(search), $options: 'i' } },
-=======
-      { petName: { $regex: search, $options: 'i' } },
-      { breed: { $regex: search, $options: 'i' } },
-      { description: { $regex: search, $options: 'i' } },
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
     ];
   }
 
@@ -44,18 +34,12 @@ export const getListings = asyncHandler(async (req, res) => {
 
 export const getListingById = asyncHandler(async (req, res) => {
   const listing = await AdoptionListing.findById(req.params.id)
-<<<<<<< HEAD
     .populate('shelter', 'name profileImage shelterProfile');
-=======
-    .populate('shelter', 'name profileImage shelterProfile address')
-    .populate('adoptionInterests.adopter', 'name email phone');
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 
   if (!listing) {
     return res.status(404).json({ success: false, message: 'Adoption listing not found' });
   }
 
-<<<<<<< HEAD
   // Adopter contact details are only visible to the shelter that owns the
   // listing (or an admin); this endpoint is publicly reachable.
   const canSeeInterests =
@@ -80,9 +64,6 @@ export const getListingById = asyncHandler(async (req, res) => {
   }
 
   res.status(200).json({ success: true, data: result });
-=======
-  res.status(200).json({ success: true, data: listing });
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 });
 
 export const createListing = asyncHandler(async (req, res) => {
@@ -153,17 +134,11 @@ export const updateListing = asyncHandler(async (req, res) => {
     const newImages = req.files.map((f) => `/uploads/${f.filename}`);
     updateData.images = [...(updateData.images || listing.images || []), ...newImages];
   }
-<<<<<<< HEAD
   const removedImages = [];
   if (req.body.removeImages) {
     const toRemove = Array.isArray(req.body.removeImages) ? req.body.removeImages : [req.body.removeImages];
     updateData.images = (updateData.images || listing.images).filter((img) => !toRemove.includes(img));
     removedImages.push(...toRemove);
-=======
-  if (req.body.removeImages) {
-    const toRemove = Array.isArray(req.body.removeImages) ? req.body.removeImages : [req.body.removeImages];
-    updateData.images = (updateData.images || listing.images).filter((img) => !toRemove.includes(img));
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   }
 
   const updated = await AdoptionListing.findByIdAndUpdate(listing._id, updateData, {
@@ -171,13 +146,10 @@ export const updateListing = asyncHandler(async (req, res) => {
     runValidators: true,
   });
 
-<<<<<<< HEAD
   for (const img of removedImages) {
     await removeUpload(img);
   }
 
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   res.status(200).json({ success: true, message: 'Listing updated', data: updated });
 });
 
@@ -193,14 +165,11 @@ export const deleteListing = asyncHandler(async (req, res) => {
   }
 
   await listing.deleteOne();
-<<<<<<< HEAD
 
   for (const img of listing.images || []) {
     await removeUpload(img);
   }
 
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   res.status(200).json({ success: true, message: 'Listing deleted' });
 });
 

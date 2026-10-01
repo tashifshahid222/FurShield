@@ -13,19 +13,11 @@ export const protect = async (req, res, next) => {
   }
 
   try {
-<<<<<<< HEAD
     const decoded = jwt.verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] });
 
     const user = await User.findById(decoded.id);
     if (!user) {
       return res.status(401).json({ success: false, message: 'Not authorized to access this route' });
-=======
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    const user = await User.findById(decoded.id).select('+password');
-    if (!user) {
-      return res.status(401).json({ success: false, message: 'User not found' });
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
     }
 
     if (user.status === 'inactive') {
@@ -35,7 +27,6 @@ export const protect = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-<<<<<<< HEAD
     return res.status(401).json({ success: false, message: 'Not authorized to access this route' });
   }
 };
@@ -66,12 +57,6 @@ export const optionalProtect = async (req, res, next) => {
   next();
 };
 
-=======
-    return res.status(401).json({ success: false, message: 'Not authorized to access this route', error: error.message });
-  }
-};
-
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 export const authorize = (...roles) => {
   return (req, res, next) => {
     if (!req.user) {

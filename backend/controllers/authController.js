@@ -19,13 +19,10 @@ const sendTokenResponse = (user, statusCode, res, message) => {
 export const register = asyncHandler(async (req, res) => {
   const { name, email, password, role, phone } = req.body;
 
-<<<<<<< HEAD
   if (role === 'admin') {
     return res.status(400).json({ success: false, message: 'Cannot register as admin' });
   }
 
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   const existing = await User.findOne({ email: email.toLowerCase() });
   if (existing) {
     return res.status(400).json({ success: false, message: 'An account with this email already exists' });
@@ -43,13 +40,6 @@ export const register = asyncHandler(async (req, res) => {
     status: 'active',
   });
 
-<<<<<<< HEAD
-=======
-  if (userRole === 'admin') {
-    return res.status(400).json({ success: false, message: 'Cannot register as admin' });
-  }
-
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   await sendNotification({
     recipient: user._id,
     type: 'system',
@@ -71,20 +61,12 @@ export const login = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
 
   if (!user) {
-<<<<<<< HEAD
     return res.status(401).json({ success: false, message: 'No account found with this email address' });
-=======
-    return res.status(401).json({ success: false, message: 'Invalid credentials' });
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   }
 
   const isMatch = await user.comparePassword(password);
   if (!isMatch) {
-<<<<<<< HEAD
     return res.status(401).json({ success: false, message: 'Incorrect password. Please try again' });
-=======
-    return res.status(401).json({ success: false, message: 'Invalid credentials' });
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   }
 
   if (user.status === 'inactive') {
@@ -170,11 +152,7 @@ export const updateShelterProfile = asyncHandler(async (req, res) => {
     establishedYear: req.body.establishedYear ?? current.establishedYear,
     capacity: req.body.capacity ?? current.capacity,
     website: req.body.website ?? current.website,
-<<<<<<< HEAD
     isVerified: current.isVerified,
-=======
-    isVerified: req.body.isVerified ?? current.isVerified,
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   };
 
   const user = await User.findByIdAndUpdate(

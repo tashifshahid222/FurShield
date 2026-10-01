@@ -13,7 +13,6 @@ import Video from '../models/Video.js';
 
 dotenv.config();
 
-<<<<<<< HEAD
 console.warn(
   '============================================================\n' +
   '  SEED WARNING: this script creates DEMO accounts with known\n' +
@@ -22,8 +21,6 @@ console.warn(
   '============================================================'
 );
 
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 const connect = async () => {
   await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/furshield');
   console.log('Connected to MongoDB');
@@ -271,14 +268,11 @@ const createCareContent = async () => {
 };
 
 const seed = async () => {
-<<<<<<< HEAD
   if (process.env.NODE_ENV === 'production') {
     console.error('Refusing to seed: NODE_ENV is "production".');
     process.exit(1);
   }
 
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   try {
     await connect();
     await createAdmin();

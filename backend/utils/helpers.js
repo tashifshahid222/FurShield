@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -9,10 +8,6 @@ const __dirname = path.dirname(__filename);
 
 const UPLOADS_DIR = path.join(__dirname, '../uploads');
 
-=======
-import Notification from '../models/Notification.js';
-
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 export const sendNotification = async ({
   recipient,
   sender = null,
@@ -37,7 +32,6 @@ export const sendNotification = async ({
   }
 };
 
-<<<<<<< HEAD
 export const MAX_PAGINATION_LIMIT = 100;
 
 export const paginate = (page = 1, limit = 20) => {
@@ -50,16 +44,10 @@ export const paginate = (page = 1, limit = 20) => {
       ? 20
       : Math.min(parsedLimit, MAX_PAGINATION_LIMIT);
 
-=======
-export const paginate = (page = 1, limit = 20) => {
-  const pageNum = parseInt(page) || 1;
-  const limitNum = parseInt(limit) || 20;
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
   const skip = (pageNum - 1) * limitNum;
   return { pageNum, limitNum, skip };
 };
 
-<<<<<<< HEAD
 export const escapeRegex = (str = '') => String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 // Removes a stored upload given a public path like "/uploads/abc.jpg".
@@ -86,8 +74,6 @@ export const removeUpload = async (publicPath) => {
   }
 };
 
-=======
->>>>>>> 01afc2f9df72d62b0b541616512cc04cfcf4d2a4
 export const buildPaginationResult = (total, pageNum, limitNum, data) => {
   return {
     data,

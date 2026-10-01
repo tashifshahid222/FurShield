@@ -1,0 +1,20 @@
+/* ============================================================================
+   FurShield Design System — entry stylesheet
+   Imported by main.jsx. The design system is split by concern:
+     tokens.css   — all CSS custom properties (colors, type, spacing, radii…)
+     base.css     — reset, typography, layout + section helpers, motion
+     components.css — buttons, forms, cards, grids, badges, alerts, tabs,
+                      pagination, modal, loaders, skeleton, states, dropdown
+     layout.css   — navbar, footer, hero, feature tiles, stats, CTA band,
+                    auth pages, dashboard shell (sidebar + topbar)
+     patterns.css — tables, card media, timeline, notifications, filters,
+                    slots, reviews, detail pages
+     responsive.css — toasts, skip-link, final media queries
+   ============================================================================ */
+
+@import './tokens.css';
+@import './base.css';
+@import './components.css';
+@import './layout.css';
+@import './patterns.css';
+@import './responsive.css';

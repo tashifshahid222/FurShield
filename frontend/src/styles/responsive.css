@@ -1,0 +1,182 @@
+/* ============================================================================
+   FurShield — Toasts, skip-link, responsive helpers, final media queries
+   ============================================================================ */
+
+/* ---------------------------------------------------------- Skip link */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 3000;
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 0 0 var(--radius-sm) 0;
+  font-weight: 600;
+}
+.skip-link:focus { left: 0; right: auto; color: #fff; }
+
+/* ---------------------------------------------------------- Toast */
+.toast-container {
+  position: fixed;
+  top: 84px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: var(--z-toast);
+  width: min(520px, calc(100vw - 32px));
+}
+.toast {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  padding: 14px 48px 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  animation: slideInRight 0.28s var(--ease);
+}
+.toast-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.toast-success { background: #d1e7dd; border-color: #badbcc; }
+.toast-success .toast-icon { background: #0f5132; color: #fff; }
+.toast-success .toast-message { color: #0f5132; }
+.toast-error { background: #f8d7da; border-color: #f5c2c7; }
+.toast-error .toast-icon { background: #842029; color: #fff; }
+.toast-error .toast-message { color: #842029; }
+.toast-info { background: #cff4fc; border-color: #b6effb; }
+.toast-info .toast-icon { background: #055160; color: #fff; }
+.toast-info .toast-message { color: #055160; }
+.toast-warning { background: #fff3cd; border-color: #ffecb5; }
+.toast-warning .toast-icon { background: #664d03; color: #fff; }
+.toast-warning .toast-message { color: #664d03; }
+
+.toast-message {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.45;
+  padding-top: 2px;
+}
+.toast-close {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  opacity: 0.6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.toast-close:hover { opacity: 1; color: inherit; }
+
+.toast-progress { display: none; }
+
+/* ---------------------------------------------------------- Responsive helpers */
+@media (max-width: 900px) {
+  .u-hide-md { display: none !important; }
+  .table .video-col { min-width: 260px; }
+}
+
+/* Keep admin table columns wide on tablet / mobile — allow horizontal scroll instead of crushing */
+@media (max-width: 1100px) {
+  table.table { min-width: 860px; }
+  .table th:first-child,
+  .table td:first-child { min-width: 230px; }
+  .table th,
+  .table td { white-space: nowrap; }
+  .dash-grid-3 table.table { min-width: 0; }
+  .dash-grid-3 .table th:first-child,
+  .dash-grid-3 .table td:first-child { min-width: 0; }
+}
+@media (max-width: 640px) {
+  .u-hide-sm { display: none !important; }
+}
+
+.faq-page .faq-question { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.reason-cell { max-width: 200px; }
+@media (max-width: 900px) {
+  .reason-cell { max-width: 320px; }
+}
+@media (max-width: 900px) {
+  .float-card { padding: 10px 12px; gap: 10px; }
+  .float-card .fc-icon { width: 34px; height: 34px; border-radius: 10px; }
+  .float-card.fc-top { top: -10px; right: -8px; }
+  .float-card.fc-bottom { bottom: -12px; left: -8px; }
+  .float-card .fc-title { font-size: 0.82rem; }
+  .float-card .fc-sub { font-size: 0.72rem; }
+  .faq-page { padding: 40px 20px !important; }
+}
+@media (max-width: 640px) {
+  .faq-page h1 { font-size: 1.6rem; }
+  .faq-page .card-padded { padding: 14px; }
+  .faq-page .form-control { padding: 10px 12px; font-size: 0.95rem; }
+}
+.hide-mobile { }
+.mobile-only { display: none; }
+
+@media (max-width: 768px) {
+  .stat-card { align-items: flex-start; }
+  .toast-container { top: 76px; left: 50%; right: auto; transform: translateX(-50%); width: calc(100vw - 24px); }
+  .toast { padding: 12px 38px 12px 12px; }
+}
+
+/* ---------------------------------------------------------- Small screens */
+@media (max-width: 640px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+  .hero-actions .btn { width: 100%; }
+  .role-picker { grid-template-columns: 1fr; }
+}
+
+/* ---------------------------------------------------------- Utility extras */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.wrap { flex-wrap: wrap; }
+.gap-1 { gap: var(--sp-2); }
+.gap-2 { gap: var(--sp-4); }
+.gap-3 { gap: var(--sp-6); }
+
+.divider-h {
+  height: 1px;
+  background: var(--border);
+  margin: var(--sp-6) 0;
+}
+
+.title-xs {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--slate-800);
+}
+
+/* Cards used on pale surfaces keep their borders */
+.on-surface-soft { background: var(--surface); }
+
+/* Ring helper for clickable card focus */
+.card:focus-visible { outline-offset: -3px; }

@@ -1,0 +1,304 @@
+/* ============================================================================
+   FurShield Base — reset, typography, layout utilities, motion primitives
+   ============================================================================ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--slate-900);
+  line-height: var(--lh-tight);
+  font-weight: 700;
+  letter-spacing: var(--ls-tight);
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+
+p { line-height: var(--lh-body); }
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--dur) var(--ease);
+}
+a:hover { color: var(--primary-dark); }
+
+img { max-width: 100%; display: block; }
+
+ul, ol { list-style: none; }
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--teal-200);
+  color: var(--teal-950);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--slate-300);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--slate-400); }
+
+/* Accessible focus */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: var(--shadow-ring);
+}
+
+/* ============================================================================
+   Containers & sections
+   ============================================================================ */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-inline: clamp(16px, 3vw, 32px);
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  padding-inline: clamp(16px, 3vw, 32px);
+}
+
+.page-section { padding: clamp(48px, 6vw, 88px) 0; }
+.page-section.muted { background: var(--surface); }
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.main-content { flex: 1; }
+
+/* ============================================================================
+   Section headers (eyebrow · title · subtitle · actions)
+   ============================================================================ */
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+.section-head-center {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--teal-100);
+  border: 1px solid #b3e1d6;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 12px;
+}
+.section-eyebrow .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary-soft);
+}
+
+.eyebrow-plain {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.eyebrow-on-dark { color: var(--teal-300); }
+
+.section-title {
+  font-size: clamp(1.75rem, 2.5vw + 0.5rem, 2.375rem);
+  font-weight: 800;
+  letter-spacing: var(--ls-tight);
+  color: var(--slate-900);
+  margin-bottom: 12px;
+}
+.section-subtitle {
+  color: var(--text-light);
+  font-size: 1.05rem;
+  max-width: 620px;
+  margin-bottom: 0;
+}
+.section-head-center .section-subtitle { margin-inline: auto; }
+.section-head-with-action {
+  position: relative;
+}
+.section-head-with-action > .btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .section-head-with-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .section-head-with-action > .btn {
+    position: static;
+    transform: none;
+    margin-top: 14px;
+    flex-shrink: 0;
+  }
+}
+
+.text-gradient {
+  background: linear-gradient(92deg, var(--teal-500) 0%, var(--teal-800) 55%, var(--accent-soft) 110%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ============================================================================
+   Text & spacing helpers
+   ============================================================================ */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+.text-muted { color: var(--text-light); }
+.text-small { font-size: var(--fs-small); }
+.text-caption { font-size: var(--fs-caption); color: var(--text-light); }
+.text-strong { font-weight: 700; }
+
+.mt-1 { margin-top: var(--sp-2); }
+.mt-2 { margin-top: var(--sp-4); }
+.mt-3 { margin-top: var(--sp-6); }
+.mt-4 { margin-top: var(--sp-8); }
+.mb-1 { margin-bottom: var(--sp-2); }
+.mb-2 { margin-bottom: var(--sp-4); }
+.mb-3 { margin-bottom: var(--sp-6); }
+.mb-4 { margin-bottom: var(--sp-8); }
+.ml-1 { margin-left: var(--sp-2); }
+.ml-2 { margin-left: var(--sp-4); }
+
+/* ============================================================================
+   Motion primitives
+   ============================================================================ */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(28px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toastProgress {
+  to { width: 0; }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+.animate-fade-in { animation: fadeIn 0.4s var(--ease) both; }
+.animate-rise { animation: fadeSlideUp 0.5s var(--ease) both; }
+.animate-rise-delay-1 { animation: fadeSlideUp 0.5s var(--ease) 0.08s both; }
+.animate-rise-delay-2 { animation: fadeSlideUp 0.5s var(--ease) 0.16s both; }
+.animate-float { animation: floatY 6s ease-in-out infinite; }
+.animate-float-delay { animation: floatY 7s ease-in-out -3.5s infinite; }
+.animate-fade-in-delay-1 { animation: fadeIn 0.4s var(--ease) 0.1s both; }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.reveal.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Reduced motion — respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
